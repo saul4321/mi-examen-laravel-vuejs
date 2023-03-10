@@ -102,13 +102,14 @@
                             <label for="interest_level_id" class="col-form-label text-md-start">{{ __('Nivel de Interes') }}</label>
 
                             <div class="col-md-12">
-                                <select id="interest_level_id"  class="form-control @error('interest_level_id') is-invalid @enderror" name="interest_level_id"  required >
+                                <select id="interest_level_id" onchange="selecOp(event.target.value)" class="form-control @error('interest_level_id') is-invalid @enderror" name="interest_level_id"  required >
                                     <option></option>
                                     <option value=1>Preparatoria</option>
                                     <option value=2>Licenciatura</option>
                                     <option value=3>Postgrado</option>
                                     </select>
 
+                                    <h1 id="capa"></h1><br>
                                 @error('interest_level_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -116,6 +117,32 @@
                                 @enderror
                             </div>
                         </div>
+                        <script
+                        src="https://code.jquery.com/jquery-3.6.4.slim.min.js"
+                        integrity="sha256-a2yjHM4jnF9f54xUQakjZGaqYs/V1CYvWpoqZzC2/Bw="
+                        crossorigin="anonymous"></script>
+                        <script>
+                            function selecOp(valor){
+                            if(valor == 1){
+                             var capa = document.getElementById("capa");
+                             capa.innerHTML = "";
+                             }
+                             if(valor == 2){
+                             var capa = document.getElementById("capa");
+                             capa.innerHTML = "";
+                             var h1 = document.createElement("h1");
+                             h1.innerHTML = "Lic Derecho, Lic Finanzas";
+                             capa.appendChild(h1);
+                             }
+                             if(valor == 3){
+                             var capa = document.getElementById("capa");
+                             capa.innerHTML = "";
+                             var h1 = document.createElement("h1");
+                             h1.innerHTML = "Mtria. Admon. De Negocios y Mtria. Direccion de proyectos";
+                             capa.appendChild(h1);
+                             }
+                            }
+                        </script>
                     
                         <div class="row mb-3">
                             <label for="email" class="col-form-label text-md-start">{{ __('Email Address') }}</label>
