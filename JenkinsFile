@@ -1,44 +1,39 @@
 pipeline {
     agent any
-    stages {
-        stage('Install') {
-            steps {
-                git branch: 'develop', url: 'https://github.com/saul4321/mi-examen-laravel-vuejs.git'
-            }
-        }
 
-        stage('Build') {
+    stages {
+        stage('Clonar Repositorio') {
             steps {
                 script {
-                    try {
-                        sh 'docker-compose exec php cp .env.example .env'
-                        sh 'docker-compose exec php composer install --ignore-platform-reqs'
-                        sh 'docker-compose exec php php artisan key:generate'
-                        sh 'docker-compose exec php php artisan migrate'
-                        sh 'docker-compose exec php chmod 777 -R storage'
-                        sh 'docker-compose exec php php artisan optimize:clear'
-                    } catch (Exception e) {
-                        echo 'Exception occurred: ' + e.toString()
-                    }
+                    // Clonar el repositorio desde GitHub
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: '']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '/root/.ssh/id_rsa', url: 'https://github.com/saul4321/mi-examen-laravel-vuejs.git']]])
                 }
             }
         }
 
-
-        stage('Clean Workspace') {
+        stage('Instalar Dependencias') {
             steps {
-                deleteDir()
+                script {
+                    // Instalar dependencias de Laravel
+                    sh 'composer install'
+                }
             }
         }
 
-
-        stage('Deploy via SSH') {
+        stage('Ejecutar Pruebas') {
             steps {
                 script {
-                    sshagent(['/root/.ssh/id_rsa.pub']) {
-                        // Assuming your Jenkins workspace contains the checked-out code
-                        sh 'scp -r $WORKSPACE/* root@192.168.9.101:/var/mail'
-                    }
+                    // Ejecutar pruebas PHPUnit
+                    sh 'php artisan test'
+                }
+            }
+        }
+
+        stage('Desplegar') {
+            steps {
+                script {
+                    // Tu lógica de despliegue aquí
+                    // Por ejemplo, puedes ejecutar comandos para desplegar en un servidor.
                 }
             }
         }
