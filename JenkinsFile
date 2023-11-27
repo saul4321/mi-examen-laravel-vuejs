@@ -29,13 +29,13 @@ pipeline {
             }
         }
 
-        stage('Desplegar') {
-            steps {
-                script {
-                    // Tu lógica de despliegue aquí
-                    // Por ejemplo, puedes ejecutar comandos para desplegar en un servidor.
-                }
-            }
-        }
+        // stage('Desplegar') {
+        //     steps {
+        //         script {
+        //             // Tu lógica de despliegue aquí
+        //             // Por ejemplo, puedes ejecutar comandos para desplegar en un servidor.
+        //         }
+        //     }
+        // }
     }
 }
