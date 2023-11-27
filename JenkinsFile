@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Clonar el repositorio desde GitHub
-                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: '']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '/root/.ssh/id_rsa', url: 'https://github.com/saul4321/mi-examen-laravel-vuejs.git']]])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: '']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '/root/.ssh/id_rsa', url: 'https://github.com/saul4321/mi-examen-laravel-vuejs.git']]])
                 }
             }
         }
