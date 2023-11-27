@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Install') {
             steps {
-                git branch: 'develop', url: 'https://github.com/saul4321/mi-examen-laravel-vuejs.git'
+                git branch: 'main', url: 'https://github.com/saul4321/mi-examen-laravel-vuejs.git'
             }
         }
 
@@ -37,7 +37,7 @@ pipeline {
                 script {
                     sshagent(['/root/.ssh/id_rsa.pub']) {
                         // Assuming your Jenkins workspace contains the checked-out code
-                        sh 'scp -r $WORKSPACE/* desarrollo@192.168.9.78:/var/contenedor/tabantaj/'
+                        sh 'scp -r $WORKSPACE/* root@192.168.9.101:/var/mail'
                     }
                 }
             }
