@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Install') {
             steps {
-                git branch: 'main', url: 'https://github.com/saul4321/mi-examen-laravel-vuejs.git'
+                git branch: 'develop', url: 'https://github.com/saul4321/mi-examen-laravel-vuejs.git'
             }
         }
 
